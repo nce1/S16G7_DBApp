@@ -135,6 +135,27 @@ public class Person{
         }
     }
     
+    public boolean verifySuspect(int bID){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT yearOfDeath FROM background WHERE backgroundId = ?");
+            pstmt.setInt(1, bID);
+            ResultSet rst = pstmt.executeQuery();
+            
+            while(rst.next()){
+                if (rst.getDate("yearOfDeath") == null)
+                    return true;
+            }
+            
+            pstmt.close();
+            conn.close();
+            return false;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    
     public boolean updateUnemployed(int bID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

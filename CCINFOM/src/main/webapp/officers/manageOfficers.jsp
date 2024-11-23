@@ -1,73 +1,88 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ccinfom.database.*"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Find Person</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Police Database Application</title>
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f4f8;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
-                margin: 0;
-                background-color: #f4f4f9;
+                color: #333;
             }
             .container {
                 background-color: #ffffff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                width: 400px;
-                box-sizing: border-box;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 450px;
                 text-align: center;
             }
             h1 {
-                color: #333;
+                font-size: 2rem;
+                color: #2d2d2d;
+                margin-bottom: 20px;
             }
             h3 {
-                color: #d9534f;
+                font-size: 1.2rem;
+                color: #e74c3c;
+                margin-bottom: 25px;
             }
             .button-group {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-                margin-top: 20px;
+                gap: 15px;
+                margin-top: 30px;
             }
-            .submit-btn, .back-btn {
-                padding: 10px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 1em;
+            a {
+                display: block;
+                text-decoration: none;
+                background-color: #3498db;
+                color: #fff;
+                padding: 12px;
+                border-radius: 6px;
+                font-size: 1.1rem;
+                transition: background-color 0.3s ease;
             }
-            .submit-btn {
-                background-color: #4CAF50;
-                color: white;
-            }
-            .submit-btn:hover {
-                background-color: #45a049;
+            a:hover {
+                background-color: #2980b9;
             }
             .back-btn {
-                background-color: #d9534f;
+                background-color: #e74c3c;
                 color: white;
+                padding: 12px;
+                font-size: 1.1rem;
+                border-radius: 6px;
+                cursor: pointer;
+                border: none;
+                transition: background-color 0.3s ease;
             }
             .back-btn:hover {
-                background-color: #c9302c;
+                background-color: #c0392b;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>Person found!</h1>
-                <div class="button-group">
-                    <a href="case/registerOfficer.jsp">Enroll Rookie Officer</a>
-                    <a href="precincts/transferOfficial.jsp">Transfer Precinct/Apply for a new Position</a>
-                    <a href="case/viewCasesPerOfficer.jsp">View Active Cases</a>
-                    <a href="case/deleteOfficer.jsp">Submit Resignation</a>
-               </div>
+            <h1>Manage Officers</h1>
+            <div class="button-group">
+                <a href="case/registerOfficer.jsp">Enroll Rookie Officer</a>
+                <a href="precincts/transferOfficial.jsp">Transfer Precinct / Apply for a New Position</a>
+                <a href="case/viewCasesPerOfficer.jsp">View Active Cases</a>
+                <a href="case/deleteOfficer.jsp">Submit Resignation</a>
+            </div>
             <div class="button-group">
                 <button class="back-btn" onclick="clearSessionAndRedirect()">Back to Main Menu</button>
             </div>
@@ -75,7 +90,6 @@
 
         <script>
             function clearSessionAndRedirect() {
-                
                 window.location.href = '../index.html';
             }
         </script>

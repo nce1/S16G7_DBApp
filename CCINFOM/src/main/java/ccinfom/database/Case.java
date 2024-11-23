@@ -145,7 +145,25 @@ public class Case {
         }
     }
 
-
+    public void getActiveCaseList() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            String query = "SELECT caseID FROM incidents WHERE dateResolved is NULL";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+        
+            while (rs.next()) {
+                allCaseIdList.add(rs.getInt("caseID"));
+            }
+        
+            pstmt.close();
+            rs.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public String assignCase() {
         if (!checkPrecinct()) {
