@@ -8,6 +8,14 @@ public class Officer{
     public String position, error;
     public java.sql.Date startDate;
     
+    public ArrayList<Integer> policeIDList = new ArrayList<>();
+    public ArrayList<Integer> backgroundIdList = new ArrayList<>();
+    public ArrayList<java.sql.Date> startDateList = new ArrayList<>();
+    public ArrayList<Integer> precinctIDList = new ArrayList<>();
+    public ArrayList<String> PrecinctNames = new ArrayList<>();
+    public ArrayList<String> officerNameList = new ArrayList<>();
+    public ArrayList<Integer> numCasesResolved = new ArrayList<>();
+    public ArrayList<Integer> numOffensesGiven = new ArrayList<>();
     public ArrayList<Integer> activeCases = new ArrayList<>();
     public ArrayList<Integer> resolvedCases = new ArrayList<>();
     public final ArrayList<String> positions = new ArrayList<String>(
@@ -326,8 +334,92 @@ public class Officer{
         }
     }
     
+    public boolean getPerformanceMetrics() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn;
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT o.policeID, CONCAT(b.lastName,' ', b.firstName) AS Officer, p.cityJurisdiction as Precinct, COUNT(oc.caseID) AS num_cases_resolved, sub.num_offenses_given FROM officercases oc LEFT JOIN officers o ON o.policeID = oc.policeID LEFT JOIN incidents i ON i.caseID = oc.caseID LEFT JOIN backgrounds b ON b.backgroundId = o.backgroundId LEFT JOIN precincts p ON p.precinctID = o.precinctID LEFT JOIN (SELECT o.policeID AS ID, COUNT(`of`.`backgroundId`) AS num_offenses_given FROM officercases oc LEFT JOIN officers o ON o.policeID = oc.policeID LEFT JOIN offenders `of` ON `of`.`caseID` = oc.`caseID` LEFT JOIN incidents i ON i.caseID = oc.caseID WHERE MONTH(i.dateResolved) = MONTH( ? ) AND YEAR(i.dateResolved) = YEAR( ? ) GROUP BY ID ) AS sub ON sub.ID = o.policeID WHERE MONTH(i.dateResolved) = MONTH( ? ) AND YEAR(i.dateResolved) = YEAR( ? ) GROUP BY o.policeID, sub.num_offenses_given, Officer, Precinct");
+            
+            ResultSet res = stmt.executeQuery();
+            
+            this.policeIDList.clear();
+            this.officerNameList.clear();
+            this.PrecinctNames.clear();
+            this.numCasesResolved.clear();
+            this.numOffensesGiven.clear();
+            
+            while (res.next()) {
+                this.policeIDList.add(res.getInt("policeID"));
+                this.officerNameList.add(res.getString("Officer"));
+                this.PrecinctNames.add(res.getString("Precinct"));
+                this.numCasesResolved.add(res.getInt("num_cases_resolved"));
+                this.numOffensesGiven.add(res.getInt("num_offenses_given"));
+            }
+            
+            stmt.close();
+            conn.close();
+            
+            return true;
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            return false;
+        }
+    }
     
-    public static void main(){
+    /* new method */
+    public boolean getPerformanceMetrics(java.sql.Date filter_date) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn;
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT o.policeID, CONCAT(b.lastName,' ', b.firstName) AS Officer, p.cityJurisdiction as Precinct, COUNT(oc.caseID) AS num_cases_resolved, sub.num_offenses_given FROM officercases oc LEFT JOIN officers o ON o.policeID = oc.policeID LEFT JOIN incidents i ON i.caseID = oc.caseID LEFT JOIN backgrounds b ON b.backgroundId = o.backgroundId LEFT JOIN precincts p ON p.precinctID = o.precinctID LEFT JOIN (SELECT o.policeID AS ID, COUNT(`of`.`backgroundId`) AS num_offenses_given FROM officercases oc LEFT JOIN officers o ON o.policeID = oc.policeID LEFT JOIN offenders `of` ON `of`.`caseID` = oc.`caseID` LEFT JOIN incidents i ON i.caseID = oc.caseID WHERE MONTH(i.dateResolved) = MONTH( ? ) AND YEAR(i.dateResolved) = YEAR( ? ) GROUP BY ID ) AS sub ON sub.ID = o.policeID WHERE MONTH(i.dateResolved) = MONTH( ? ) AND YEAR(i.dateResolved) = YEAR( ? ) GROUP BY o.policeID, sub.num_offenses_given, Officer, Precinct");
+            stmt.setDate(1, filter_date);
+            stmt.setDate(2, filter_date);
+            stmt.setDate(3, filter_date);
+            stmt.setDate(4, filter_date);
+            
+            ResultSet res = stmt.executeQuery();
+            
+            this.policeIDList.clear();
+            this.officerNameList.clear();
+            this.PrecinctNames.clear();
+            this.numCasesResolved.clear();
+            this.numOffensesGiven.clear();
+            
+            while (res.next()) {
+                this.policeIDList.add(res.getInt("policeID"));
+                this.officerNameList.add(res.getString("Officer"));
+                this.PrecinctNames.add(res.getString("Precinct"));
+                this.numCasesResolved.add(res.getInt("num_cases_resolved"));
+                this.numOffensesGiven.add(res.getInt("num_offenses_given"));
+            }
+            
+            stmt.close();
+            conn.close();
+            
+            return true;
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
+    public static void main(String[] args){
+        Officer officer = new Officer();
+        officer.getPerformanceMetrics(Common.toDate("2024-11-01"));
         
+        for (int i = 0; i < officer.policeIDList.size(); i++) {
+            System.out.println(officer.officerNameList.get(i));
+            System.out.println(officer.numCasesResolved.get(i));
+            System.out.println(officer.numOffensesGiven.get(i));
+            System.out.println(officer.PrecinctNames.get(i));
+            System.out.println();
+        }
     }
 }
