@@ -9,6 +9,7 @@ import java.sql.*;
 public class Case {
     public int policeId, caseId;
     
+    public ArrayList<String> officerNames = new ArrayList<>();
     public ArrayList<Integer> policeIdList = new ArrayList<>();
     public ArrayList<Integer> caseIdList = new ArrayList<>();
     public ArrayList<Integer> allPoliceIdList = new ArrayList<>();
@@ -201,5 +202,33 @@ public class Case {
             }
         }
     } 
+    
+    public boolean getAssignedOfficers(int caseID) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+
+            PreparedStatement stmt = conn.prepareStatement("SELECT o.policeID, CONCAT(b.lastName, ', ', b.firstName) AS officerName FROM officercases oc JOIN officers o ON o.policeID = oc.policeID JOIN backgrounds b ON o.backgroundId = b.backgroundId WHERE caseID = ?");
+            stmt.setInt(1, caseID);
+            
+            ResultSet res = stmt.executeQuery();
+            
+            this.policeIdList.clear();
+            this.officerNames.clear();
+            
+            while (res.next()) {
+                this.policeIdList.add(res.getInt("policeID"));
+                this.officerNames.add(res.getString("officerName"));
+            }
+            
+            stmt.close();
+            conn.close();
+            
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 
