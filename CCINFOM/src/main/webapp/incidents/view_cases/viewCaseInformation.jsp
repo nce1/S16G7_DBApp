@@ -26,7 +26,9 @@
            
            Offender offenders = new Offender();
            offenders.getOffenders(incdt.caseID);
-               
+           
+           Case policeIDs = new Case();
+           policeIDs.getAssignedOfficers(incdt.caseID);
         %>
         <a>Case ID: <%= incdt.caseID %></a><br>
         <a>Case Description: <%= incdt.description %></a><br>
@@ -36,6 +38,11 @@
         <a>Date Resolved: <%= incdt.dateResolved %></a><br>
         <a>Precinct: <%= p.cityJurisdiction %></a><br><br>
         
+        <h2>Assigned officer/s</h2>
+        <% for (int i = 0; i < policeIDs.policeIdList.size(); i++) { %>
+        <a>(<%= policeIDs.policeIdList.get(i) %>) <%= policeIDs.officerNames.get(i) %></a><br>
+        <% } %>
+        <br>
         <h2>Participants</h2>
         <% for (int i = 0; i < participants.backgroundIdList.size(); i++) { %>
         <a>Background ID: <%=participants.backgroundIdList.get(i) %></a><br>
