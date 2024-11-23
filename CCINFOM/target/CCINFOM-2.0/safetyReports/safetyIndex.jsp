@@ -101,7 +101,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>Update Your Address</h1>
+            <h1>Cities Ranking</h1>
             <p>Below is a list of cities ranked from <span class="highlight">safest</span> to <span class="highlight">unsafest</span> based on reported crime data.</p>
 
             <div class="cities-list">

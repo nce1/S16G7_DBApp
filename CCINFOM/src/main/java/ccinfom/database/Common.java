@@ -76,13 +76,15 @@ public class Common {
         return sortedList;
     }
     
-    public static void main(String[] args){
-        List<Map.Entry<String, Map<String, Integer>>> temp = getData();
-        for (Map.Entry<String, Map<String, Integer>> entry : temp) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+    public static Map<String, Integer> getCityMap(String key){
+        getData();
+        for (Map.Entry<String, Map<String, Integer>> entry : Common.cityCrime){
+            if (entry.getKey().equals(key))
+                return entry.getValue();
         }
-        
+        return null;
     }
+    
     
     public static ArrayList<String> formatText(){
         getData();
@@ -92,4 +94,6 @@ public class Common {
         }
         return sortedCities;
     }
+    
+    
 }
