@@ -28,6 +28,6 @@
             </select><br>
             <input type="submit" value="Proceed"><br>
         </form>
-        <a href="select_jurisdiction.jsp">Back</a>
+        <a href="../../../index.html">Back</a>
     </body>
 </html>

@@ -28,17 +28,18 @@
                 boolean res = incdt.submitIncindent();
                 
                 prtcpnt.caseID = incdt.caseID;
-                
                 prtcpnt.backgroundId = Integer.parseInt(request.getParameter("backgroundId"));
                 prtcpnt.involvement = request.getParameter("involvement");
                 prtcpnt.testimony = request.getParameter("testimony");
                 
                 boolean res2 = prtcpnt.addParticipant();
           
-                if (res) { %>
+                if (res && res2) { %>
             <h1>Incident submitted</h1>
-            <% } else { %>
+            <% } else if (res && !res2) { %>
             <h1>Error submitting incident</h1>
+            <% } else { %>
+            <h1>Error adding participant</h1>
             <% } %>
             <input type="submit" value="Return to Menu">
         </form>

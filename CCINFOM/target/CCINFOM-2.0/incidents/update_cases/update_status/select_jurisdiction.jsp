@@ -24,6 +24,6 @@
             </select><br>
             <input type="submit" value="Proceed"><br>
         </form>
-        <a href="../../manage_incidents.html">Back</a>
+        <a href="../../../index.html">Back</a>
     </body>
 </html>
