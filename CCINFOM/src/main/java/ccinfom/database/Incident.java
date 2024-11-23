@@ -156,7 +156,7 @@ public class Incident {
 	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             System.out.println("Connection successful");
             
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM incidents WHERE precinctID = ? AND ISNULL(dateResolved)");
+            PreparedStatement stmt = conn.prepareStatement("SELECT i.caseID, i.description, i.type, i.status, i.dateReported, i.dateOfOccurrence, i.dateResolved, i.precinctID FROM incidents i LEFT JOIN officercases oc ON oc.caseID = i.caseID WHERE i.precinctID = ? AND i.dateResolved IS NULL GROUP BY i.caseID HAVING COUNT(oc.policeID) > 0");
             stmt.setInt(1, precinctID);
             
             ResultSet res = stmt.executeQuery();
@@ -448,11 +448,8 @@ public class Incident {
     
     public static void main(String[] args) {
         Incident i = new Incident();
-        i.getIncidentListWithFilter("all", "all", "all", null, null, null);
-        for (int j = 0; j < i.caseIDList.size(); j++) {
+        i.getIncidentListUnresolved(1000);
+        for (int j = 0; j < i.caseIDList.size(); j++)
             System.out.println(i.caseIDList.get(j));
         }
-    }
-    
-    
-}
+    } 
