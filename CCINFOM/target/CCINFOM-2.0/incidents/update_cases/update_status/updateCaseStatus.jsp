@@ -26,6 +26,7 @@
         <a>Type: <%= incdt.incident_type %></a><br>
         <a>Status: <%= incdt.status %></a><br>
         <a>Date Reported: <%= incdt.dateReported %></a><br>
+        <a>Date of incident occurrence: <%= incdt.dateOfOccurrence %> </a><br>
         <a>Date Resolved: <%= incdt.dateResolved %></a><br>
         <a>Precinct: <%= p.cityJurisdiction %></a><br><br>
         <form action="process_update_status.jsp">

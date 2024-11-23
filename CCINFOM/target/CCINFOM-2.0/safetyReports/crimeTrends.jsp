@@ -22,6 +22,7 @@
             justify-content: space-between;
             align-items: flex-start;
             width: 80%;
+            margin-bottom: 40px;
         }
 
         .list-container {
@@ -50,12 +51,13 @@
         li {
             margin: 5px 0;
         }
-        
+
         .button-group {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
+
         .back-btn {
             flex: 1;
             padding: 10px;
@@ -70,6 +72,41 @@
         .back-btn:hover {
             background-color: #c9302c;
         }
+
+        /* Style for the table displaying monthly crime data */
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Ensure the table scrolls if too wide */
+        .scrollable-table {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -95,7 +132,38 @@
             </ul>
         </div>
     </div>
-            
+
+    <!-- Monthly and Yearly Crime Frequency Table -->
+    <div class="table-container">
+        <h2>Crime Frequency by Month and Year</h2>
+        <div class="scrollable-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Crime Type</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        // Get monthly crime data
+                        List<Map<String, Object>> crimeFreqData = crimeObj.getCrimeFrequency(); 
+                        for (Map<String, Object> data : crimeFreqData) {
+                    %>
+                        <tr>
+                            <td><%= data.get("report_year") %></td>
+                            <td><%= data.get("report_month") %></td>
+                            <td><%= data.get("crime_type") %></td>
+                            <td><%= data.get("frequency") %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="button-group">
         <button class="back-btn" onclick="history.back()">Back</button>
     </div>
@@ -115,7 +183,6 @@
                 }
             %>],
             datasets: [{
-                label: 'Crime Types Distribution',
                 data: [<% 
                     for (Map<String, Object> crimeData : crimeTypes) { 
                         out.print(crimeData.get("count") + ",");
@@ -139,7 +206,7 @@
                         callbacks: {
                             label: function(tooltipItem) {
                                 var label = crimeData.labels[tooltipItem.dataIndex];
-                                return `${label}`;
+                                return ${label};
                             }
                         }
                     }
@@ -149,4 +216,5 @@
     </script>
 </body>
 </html>
+
 
