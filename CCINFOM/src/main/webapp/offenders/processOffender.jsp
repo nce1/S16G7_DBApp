@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Application Page</title>
+        <title>Manage Offenders</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -133,7 +133,7 @@
 
             %>
             <div class="button-group">
-                <button type="button" class="back-btn" onclick="history.back()">Back</button>
+                <button type="button" class="back-btn" onclick="window.location.href='manageRecords.html'">Back</button>
             </div>
         </form>
         <script>

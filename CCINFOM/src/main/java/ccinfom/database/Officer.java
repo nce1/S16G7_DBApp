@@ -12,6 +12,7 @@ public class Officer{
     public ArrayList<Integer> backgroundIdList = new ArrayList<>();
     public ArrayList<java.sql.Date> startDateList = new ArrayList<>();
     public ArrayList<Integer> precinctIDList = new ArrayList<>();
+    public ArrayList<String> positionIDList = new ArrayList<>();
     public ArrayList<String> PrecinctNames = new ArrayList<>();
     public ArrayList<String> officerNameList = new ArrayList<>();
     public ArrayList<Integer> numCasesResolved = new ArrayList<>();
@@ -351,6 +352,32 @@ public class Officer{
         }
     }
     
+    public boolean getAllOfficers(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn;
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM officers");
+            
+            ResultSet res = stmt.executeQuery();
+            
+            while (res.next()) {
+                this.policeIDList.add(res.getInt("policeID"));
+                this.backgroundIdList.add(res.getInt("backgroundId"));
+                this.positionIDList.add(res.getString("position"));
+                this.precinctIDList.add(res.getInt("precinctID"));
+                this.startDateList.add(res.getDate("startDate"));
+            }
+            
+            stmt.close();
+            conn.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
    
     public boolean getPerformanceMetrics() {
         try {

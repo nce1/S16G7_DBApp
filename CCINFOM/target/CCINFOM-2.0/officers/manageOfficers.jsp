@@ -78,10 +78,11 @@
         <div class="container">
             <h1>Manage Officers</h1>
             <div class="button-group">
-                <a href="case/registerOfficer.jsp">Enroll Rookie Officer</a>
-                <a href="precincts/transferOfficial.jsp">Transfer Precinct / Apply for a New Position</a>
-                <a href="case/viewCasesPerOfficer.jsp">View Active Cases</a>
-                <a href="case/deleteOfficer.jsp">Submit Resignation</a>
+                <a href="registerOfficer.jsp">Enroll Rookie Officer</a>
+                <a href="transferOfficial.jsp">Transfer Precinct / Apply for a New Position</a>
+                <a href="viewCasesPerOfficer.jsp">View Active Cases</a>
+                <a href="viewAllOfficers.jsp">View Officers</a>
+                <a href="deleteOfficer.jsp">Submit Resignation</a>
             </div>
             <div class="button-group">
                 <button class="back-btn" onclick="clearSessionAndRedirect()">Back to Main Menu</button>

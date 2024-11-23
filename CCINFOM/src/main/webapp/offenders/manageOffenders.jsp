@@ -80,8 +80,8 @@
             <div class="button-group">
                 <a href="registerSuspect.jsp">Add Offender</a>
                 <a href="updateStatus.jsp">Update Suspect Status</a>
-                <a href="case/viewCasesPerOfficer.jsp">View Active Cases</a>
-                <a href="case/deleteOfficer.jsp">Submit Resignation</a>
+                <a href="viewOffenders.jsp">View Offenders</a>
+                <a href="deleteOffender.jsp">Delete Entry</a>
             </div>
             <div class="button-group">
                 <button class="back-btn" onclick="clearSessionAndRedirect()">Back to Main Menu</button>

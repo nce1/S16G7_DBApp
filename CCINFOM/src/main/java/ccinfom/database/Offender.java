@@ -97,10 +97,78 @@ public class Offender {
             
             stmt.close();
             conn.close();
-            
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean getAllOffenders(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn;
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM offenders");
+            
+            ResultSet res = stmt.executeQuery();
+            
+            while (res.next()) {
+                this.caseIDList.add(res.getInt("caseID"));
+                this.backgroundIDList.add(res.getInt("backgroundId"));
+                this.offenseList.add(res.getString("offense"));
+                this.statusList.add(res.getString("status"));
+            }
+            
+            stmt.close();
+            conn.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deleteOffender(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/police_database?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT status FROM offenders WHERE backgroundId = ? AND caseID = ?");
+            pstmt.setInt(1, this.backgroundId);
+            pstmt.setInt(2, this.caseID);
+            
+            ResultSet rst = pstmt.executeQuery();
+            String status;
+            Boolean flag = false;
+            while(rst.next()){
+                status = rst.getString("status");
+                if (status == null){
+                    pstmt.close();
+                    conn.close();
+                    this.error = "Please verify the offender's ID and the case ID.";
+                    return false;
+                } else if(!status.equals("Dismissed")){
+                    pstmt.close();
+                    conn.close();
+                    this.error = "This offender is not qualified for deletion.";
+                    return false;
+                }
+                flag = true;
+            }
+            if (!flag)
+                this.error = "Please verify the offender's ID and the case ID.";
+            
+            pstmt = conn.prepareStatement("DELETE FROM offenders WHERE backgroundId = ? AND caseID = ?");
+            pstmt.setInt(1, this.backgroundId);
+            pstmt.setInt(2, this.caseID);
+            pstmt.execute();
+            
+            pstmt.close();
+            conn.close();
+            return flag;
+        } catch(Exception e){
+            this.error = e.getMessage();
             return false;
         }
     }
