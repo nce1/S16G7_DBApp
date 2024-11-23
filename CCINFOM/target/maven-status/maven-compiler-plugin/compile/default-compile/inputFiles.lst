@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Case.java
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Common.java
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Incident.java
@@ -9,15 +8,3 @@ C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Offe
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Crime.java
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Person.java
 C:\Users\nceio\Downloads\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Precinct.java
-=======
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Profile.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Crime.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Incident.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Offender.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Case.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Common.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Precinct.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Participant.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Person.java
-C:\Users\maria\Documents\CCINFOM\DBApp_git\S16G7_DBApp\CCINFOM\src\main\java\ccinfom\database\Officer.java
->>>>>>> 97fd3e7e44f1debfec2534e8d7267b45178ce913
