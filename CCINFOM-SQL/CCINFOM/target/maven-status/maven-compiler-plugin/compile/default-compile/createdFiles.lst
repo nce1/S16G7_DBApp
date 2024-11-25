@@ -1,0 +1,10 @@
+ccinfom\database\Incident.class
+ccinfom\database\Profile.class
+ccinfom\database\Case.class
+ccinfom\database\Common.class
+ccinfom\database\Crime.class
+ccinfom\database\Officer.class
+ccinfom\database\Participant.class
+ccinfom\database\Offender.class
+ccinfom\database\Person.class
+ccinfom\database\Precinct.class

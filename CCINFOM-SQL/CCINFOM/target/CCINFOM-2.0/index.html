@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Database Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Police Database Application</h1>
+
+    <nav>
+        <!-- General Links -->
+        <section>
+            <h2>General</h2>
+            <ul>
+                <li><a href="background/registerPerson.html">Register New Individual</a></li>
+                <li><a href="background/getRecord.html">Find Person</a></li>
+            </ul>
+        </section>
+
+        <!-- Core Management -->
+        <section>
+            <h2>Core Management</h2>
+            <ul>
+                <li><a href="incidents/manage_incidents.html">Manage Incidents</a></li>
+                <li><a href="officers/manageOfficers.jsp">Manage Officers</a></li>
+                <li><a href="precincts/manage_precincts.html">Manage Precinct</a></li>
+                <li><a href="offenders/manageOffenders.jsp">Manage Offenders</a></li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Transactions</h2>
+            <ul>
+                <li><a href="background/suspect_profiling.html">Suspect Profiling</a></li>
+                <li><a href="case/assignCaseToOfficer.jsp">Case Assignment</a></li>
+                <li><a href="officers/transferOfficial.jsp">Transfer Officer</a></li>
+                <li><a href="incidents/update_cases/update_status/select_jurisdiction.jsp">Update a Case</a></li>
+            </ul>
+        </section>
+       
+        <section>
+            <h2>Reports</h2>
+            <ul>
+                <li><a href="safetyReports/crimeTrends.jsp">Crime Trends</a></li>
+                <li><a href="safetyReports/safetyIndex.jsp">Check Safety Index</a></li>
+                <li><a href="officerPerfMetrics/selectFilter.html">Officer Performance Metrics</a></li>
+                <li><a href="precincts/precinctReport/precinctChosen.jsp">Precinct Activity</a></li>
+            </ul>
+        </section>
+    </nav>
+    </body>
+</html>
+
